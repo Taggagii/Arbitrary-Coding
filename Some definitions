@@ -1,5 +1,13 @@
 import math
 
+
+def smallest_digit_sum(n):
+    '''
+    returns the smallest digit sum for a given number
+    '''
+    x = n//9
+    return (1+(n-(9*x)))*(10**x)-1
+
 def fibs(x):
     '''
     returns a list of fibonacci numbers to a given value (x)
