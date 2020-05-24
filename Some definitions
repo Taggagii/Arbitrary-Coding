@@ -1,6 +1,5 @@
 import math
 
-
 def smallest_digit_sum(n):
     '''
     returns the smallest digit sum for a given number
