@@ -1,22 +1,6 @@
 import math
+    
 
-def smallest_digit_sum(n):
-    '''
-    returns the smallest digit sum for a given number
-    '''
-    x = n//9
-    return (1+(n-(9*x)))*(10**x)-1
-
-def fibs(x):
-    '''
-    returns a list of fibonacci numbers to a given value (x)
-    '''
-    fl = [0, 1]
-    for i in range(x-1):
-        fl.append(fl[i] + fl[i+1])
-    return fl
-
- 
 def primes_sieve(to):
     '''
     returns primes to a number using the sieve
@@ -36,6 +20,15 @@ def primes_sieve(to):
             newprimes.append(i)    
     return newprimes
 
+def gen_primes():
+    yield 2
+    n = 3
+    while True:
+        yield n
+        n += 2
+        while not prime(n):
+            n += 2
+
 def list_of_prime_factors(to):
     '''
     returns the number of primes factors
@@ -54,32 +47,35 @@ def prime(n):
     n = int(n)
     if n <= 3: return n > 1
     if n % 2 == 0 or n % 3 == 0: return False
-
-    i = 5
-    while True:
+    for i in range(5, int(math.sqrt(n))+1, 6):
         if n % i == 0 or n % (i + 2) == 0:
             return False
-        if i*i > n: break
-        i += 6
     return True
-    
-def list_of_primes(start, length):
+
+def primorial(upper):
+    '''
+    returns the primorial under a certain upper value
+    '''
+    primorial, value = 2, 1
+    while primorial < upper:
+        value += 2
+        if prime(value):
+            primorial *= value
+    return primorial//value
+
+def list_of_primes(length):
     """
-    returns a list of primes numbers of a specified length (very few uses / use primes_sieve)
+    returns a list of primes numbers of a specified length
     """
-    if start % 2 == 0: start -= 1
-    i = start
-    if start < 2:
-        primes = [2, 3]
-    else:
-        primes = []
+    primes, counter, value = [2], 1, 1
     while True:
-        i += 2
-        if prime(i):
-            primes.append(i)
-            if len(primes) >= length:
-                return primes
-                
+        value += 2
+        if prime(value):
+            primes.append(value)
+            counter += 1
+        if counter == length:
+            return primes
+
 def sumdigits(number):
     '''
     sums the digits of a number
@@ -206,7 +202,6 @@ def which_pandigital(number, from_zero = False):
             if i == 0: i = 1
             return i-1
     return 9
-    
 def find_alpha_value(letter):
     '''
     returns alphabetical value of a letter
@@ -327,7 +322,6 @@ def pentagonal_number(number):
     checks if a number is a pentagonal number
     '''
     return (math.sqrt(24*number + 1) + 1) % 6 == 0
-    
 def pentagonal_number_at(n):
     '''
     returns a pentagonal number at the place n
@@ -351,7 +345,6 @@ def twice_square(number):
     checks if a number is twice a square
     '''
     return (math.sqrt(number/2)) == float(int((math.sqrt(number/2))))
-    
 import numpy as np
 def primefactors(n):
     '''
@@ -444,10 +437,14 @@ def lemma(n):
     '''returns the length of a nubmer'''
     return int(1 + math.log10(n))
 
+def first_digits_of_power(base, power, digits):
+    '''
+    for a given base and power, returns the number of digits specified from the beginning
+    '''
+    return int(10**(power * math.log10(base) - (1 + int(power * math.log10(base))) + digits))
+
+
 def sqrt_to(n, amount=10):
-    '''
-    returns the square root of a number to a set decimal place
-    '''
     if 1 <= n < 100: decimal_place = 1
     else: decimal_place = int(1 + math.log10(n))//2
     a, b = 5*n, 5
