@@ -20,7 +20,26 @@ def primes_sieve(to):
             newprimes.append(i)    
     return newprimes
 
+
+primes = prime_sieve(100000)
+
+def phi(n):
+    '''
+    euler's totient function
+    '''
+    value = n
+    for prime in primes:
+        if n % prime == 0:
+            value *= (1 - (1/prime))
+        else: break
+        if prime > n: break
+    return value
+
+
 def gen_primes():
+    '''
+    generates primes i guess
+    '''
     yield 2
     n = 3
     while True:
@@ -162,14 +181,13 @@ def check_pandigital_from_zero(number):
 
 def give_concat(base, n):
     '''
-    returns...something?
+    returns the multiples of the base times n together as a string... for some reason
     '''
     base = int(base)
     values = []
     for i in range(1, n+1):
         values.append(str(base*i))
     return ''.join(values)
-
 
 def findfraction(n):
     '''
@@ -346,6 +364,7 @@ def twice_square(number):
     '''
     return (math.sqrt(number/2)) == float(int((math.sqrt(number/2))))
 import numpy as np
+
 def primefactors(n):
     '''
     returns the prime factors of a number
@@ -361,6 +380,24 @@ def primefactors(n):
     if n > 1:
         factors.append(n)
     return factors
+
+def GCF(one, two):
+    '''
+    returns the greatest common factor of two numbers using the euclidean algorithm
+    '''
+    smaller = min(one, two)
+    bigger = max(one, two)
+    q, r = divmod(bigger, smaller)
+    previous = 1
+    while True:
+        if r == 0: return previous
+        previous = r
+        bigger = smaller
+        smaller = r
+        q, r = divmod(bigger, smaller)
+
+
+
 
 def numberofprimefactors(number, list):
     '''
