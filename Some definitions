@@ -1,5 +1,17 @@
 import math
     
+def fibs(amount):
+    '''
+    function for finding fibonacci numbers up to a given amount
+    '''
+    values = [0, 1] #making a list with the first two fibonacci numbers
+    if not isinstance(amount, int) or amount < 0: #error checking for non-int or negative inputs
+        return []
+    if amount < 2: #returning early if amount is below 2
+        return values[:amount]
+    for i in range(amount - 2):
+        values.append(values[-1] + values[-2]) #appends the sum of the previous two numbers to "values"
+    return values
 
 def primes_sieve(to):
     '''
