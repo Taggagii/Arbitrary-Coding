@@ -2,14 +2,14 @@ from PIL import Image
 import pyscreenshot as ss
 #print([i for i in globals() if globals()[i] is value]) just a thing
 indexes = [0]
-one = ss.grab((200, 200, 700, 700))
-two = ss.grab((400, 400, 425, 450))
+#one = ss.grab((200, 200, 700, 700))
+#two = ss.grab((400, 400, 425, 425))
 one = Image.open('imageone.png')
 two = Image.open('imagetwo.png')
 widthone, heightone = one.size
 widthtwo, heighttwo = two.size
-#one.show()
-#two.show()
+one.show()
+two.show()
 one = list(one.getdata())
 two = list(two.getdata())
 while indexes != []:
@@ -45,7 +45,7 @@ while indexes != []:
         counter = 0
         for i in range(len(data)):
             if i in indexes or counter > 0:
-                output.append((data[i][0], 0, data[i][2], data[i][3]))
+                output.append((data[i][0], 0, data[i][2]))
                 counter += 1
                 if counter == row_length:
                     counter = 0
