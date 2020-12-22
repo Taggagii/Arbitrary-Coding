@@ -1,4 +1,8 @@
 import time
+
+#someone made a very long and verbose and, frankly, painful unit converter in my class. They told me there "wasn't an easier way" and challanged me to make a better one
+#I made something which was more expandable and much smaller. Perhaps at the cost of simplisity
+
 #to expand: add values into amounts and units that correspond to their base value for their unit thing (distance, weight, etc.)
 #keep them in the right order
 amounts = [0.3048, 0.4572, 1.0, 1609.34, 9460730472580800]
