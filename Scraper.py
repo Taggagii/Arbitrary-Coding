@@ -1,3 +1,4 @@
+  
 #this is a webscraper which takes in words from "TestingWords.txt" and formats them into an output txt
 #it utilizes multithreading to perform the downloads asynchronously which is much faster than doing it one at a time
 
@@ -65,7 +66,7 @@ def downloadWord(word):
         definitions = []
         definitionIndex = entry.find_all(class_="sb-0")
         for defintion in definitionIndex:
-            definitions.append([re.sub(" +", " ", defintion.text.replace("\n", "^"))])
+            definitions.append([re.sub(" +", " ", defintion.text.replace("\n", "^")).replace("^ ^", "\n")])
 
         sbValue = 1
         while True:
@@ -98,10 +99,11 @@ def downloadWords(words):
         executor.map(downloadWord, words)
         
 
-words = open("TestingWords.txt", "r").read().split("\n")
-s = time.time()
-downloadWords(words)
-e = time.time()
 
-print(f"It took {e - s} seconds to download {len(words)} words utilizing {min(MAX_THREADS, len(words))} workers")
-
+downloadWord("incandescent")
+##words = open("TestingWords.txt", "r").read().split("\n")
+##s = time.time()
+##downloadWords(words)
+##e = time.time()
+##
+##print(f"It took {e - s} seconds to download {len(words)} words utilizing {min(MAX_THREADS, len(words))} workers")
