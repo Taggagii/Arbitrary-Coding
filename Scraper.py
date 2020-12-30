@@ -98,7 +98,7 @@ def downloadWords(words):
         executor.map(downloadWord, words)
         
 
-words = open("engmix.txt", "r").read().split("\n")
+words = open("TestingWords.txt", "r").read().split("\n")
 s = time.time()
 downloadWords(words)
 e = time.time()
