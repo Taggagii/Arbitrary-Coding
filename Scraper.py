@@ -1,4 +1,3 @@
-  
 #this is a webscraper which takes in words from "TestingWords.txt" and formats them into an output txt
 #it utilizes multithreading to perform the downloads asynchronously which is much faster than doing it one at a time
 
@@ -75,7 +74,7 @@ def downloadWord(word):
             sbValue += 1
             counter = 0
             for definition in definitionIndex:
-                definitions[counter].append(re.sub(" +", " ", defintion.text.replace("\n", "^")).replace("^ ^", "\n")))
+                definitions[counter].append(re.sub(" +", " ", defintion.text.replace("\n", "^")).replace("^ ^", "\n"))
                 counter += 1
             
                 
