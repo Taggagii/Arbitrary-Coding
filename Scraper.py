@@ -99,10 +99,10 @@ def downloadWords(words):
         
 
 
-downloadWord("incandescent")
-##words = open("TestingWords.txt", "r").read().split("\n")
-##s = time.time()
-##downloadWords(words)
-##e = time.time()
-##
-##print(f"It took {e - s} seconds to download {len(words)} words utilizing {min(MAX_THREADS, len(words))} workers")
+words = open("TestingWords.txt", "r").read().split("\n")
+s = time.time()
+downloadWords(words)
+e = time.time()
+
+print(f"It took {e - s} seconds to download {len(words)} words utilizing {min(MAX_THREADS, len(words))} workers")
+
