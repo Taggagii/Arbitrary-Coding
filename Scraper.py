@@ -75,7 +75,7 @@ def downloadWord(word):
             sbValue += 1
             counter = 0
             for definition in definitionIndex:
-                definitions[counter].append(re.sub(" +", " ", definition.text).replace("\n \n", "\n"))
+                definitions[counter].append(re.sub(" +", " ", defintion.text.replace("\n", "^")).replace("^ ^", "\n")))
                 counter += 1
             
                 
