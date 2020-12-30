@@ -1,3 +1,8 @@
+#this is a webscraper which takes in words from "TestingWords.txt" and formats them into an output txt
+#it utilizes multithreading to perform the downloads asynchronously which is much faster than doing it one at a time
+
+
+
 import requests, time, concurrent.futures, re, io, multiprocessing
 from bs4 import BeautifulSoup
 
@@ -25,7 +30,7 @@ def pushInfoToOutput(word, wordClass, entrys, didYouKnow):
         output += (didYouKnow)
         break
     
-    with io.open("Fuck/" + word + ".txt", "a+", encoding = "utf-8") as file:
+    with io.open(outputTxtName, "a+", encoding = "utf-8") as file:
         file.write(output.strip() + "\n\n\n")
     
          
@@ -87,7 +92,6 @@ def downloadWord(word):
      
 
     time.sleep(0.25)
-
 
 
 def downloadWords(words):
