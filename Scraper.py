@@ -89,8 +89,6 @@ def downloadWord(word):
         pass
            
     pushInfoToOutput(word, wordClass, entrys, didYouKnow)
-     
-
     time.sleep(0.25)
 
 
