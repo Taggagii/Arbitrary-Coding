@@ -227,7 +227,8 @@ while not leave:
     if counter == 6:
         clear()
         if action == 'e':
-            key_gen = make_key_string(key, )
+
+            key_gen = make_key_string(key, message)
             thing = ''
             for i in message:
                 thing += encode(i, next(key_gen))
@@ -259,6 +260,7 @@ while not leave:
             if yes:
                 txt.write(thing)
                 txt.close()
+                
                 print('Written to', f'{name}.txt')
             input('Press ENTER to restart or ESC to leave: ')
             if counter < 6:
