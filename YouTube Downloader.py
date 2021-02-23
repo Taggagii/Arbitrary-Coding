@@ -1,7 +1,7 @@
 from pytube import YouTube, Playlist
 import os
 while True:
-    url = input("Enter your playlistt or video URL: ").strip()
+    url = input("Enter your playlist or video URL: ").strip()
     if url == '' or ' ' in url or 'youtube' not in url:
         print('Please enter a proper Youtube URL\n')
     else: break
@@ -23,7 +23,7 @@ if url_type == "playlist":
             counter += 1
             print(counter)
         except Exception as e:
-            print('Error occured with ' + link, e)
+            print('Error occurred with ' + link, e)
             pass
     print('Download finished')
 if url_type == "video":
@@ -32,7 +32,7 @@ if url_type == "video":
         name = video.streams.filter(only_audio=download_type)[0].download()
         if download_type: os.rename(name, str(name)[:-1] + '3')
     except Exception as e:
-        print('Error occured with ' + url, e)
+        print('Error occurred with ' + url, e)
     print('Download finished')
 
 
