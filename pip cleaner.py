@@ -1,3 +1,8 @@
+#I don't know if this is already a command in pip, but many times I have found myself needing a way to clear out my pip to do testing or because I got tired of having a million 
+# things installed when I will never use them again
+#so, this script will quickly just unintall everything that's not in the "do_not_delete" list
+
+
 import subprocess as sub
 
 #get names of all installed pip files
