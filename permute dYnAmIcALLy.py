@@ -19,7 +19,7 @@ for i in range(size - 1):
 
 output += '\n'
 for _ in range(size):
-    output += '\t'
+    output += '\t' # i know  i could have used '\t' * size I was just going quickly
 output += f"file.write({' + '.join(iValues)} + ' ')"
 
 import time
