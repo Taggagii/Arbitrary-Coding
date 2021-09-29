@@ -1,3 +1,7 @@
+''' 
+compilation of commonly helpful functions I'd regarded as possibly useful in the future. From my time doing project euler
+'''
+
 import math
     
 def fibs(amount):
