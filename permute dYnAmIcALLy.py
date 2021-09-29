@@ -14,7 +14,7 @@ for i in range(size - 1):
     iValues.append(f"chr({iString})")
     output += "\n"
     for _ in range(i + 1):
-        output += '\t'
+        output += '\t' # i know  i could have used '\t' * size I was just going quickly
     output += f"for {iString} in range(ord('a'), ord('z') + 1):"
 
 output += '\n'
