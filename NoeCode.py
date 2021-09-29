@@ -1,3 +1,10 @@
+'''
+Home made cipher joke, it's lost all effectiveness now that it's posted online. But it was just me playing around to see if I made some weird and arbitrary 
+encoding technique then could I find a way to decode it too. Was fun to make. Nearly useless. Outputs in binary so the user can send the messages without loss
+from things like discord, which take certain characters (* `) to mean different things than literals
+'''
+
+
 import math
 def prime(n):
     n = int(n)
