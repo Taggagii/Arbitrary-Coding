@@ -10,7 +10,7 @@ def permute(length: int, file, prev = None):
         return prev
     for i in range(ord('a'), ord('z') + 1):
         value = permute(length, file, prev + chr(i))
-        if type(value) == str:
+        if isinstance(value, str):
             file.write(value + ", ")
 
 permute(int(input("size: ")), open(input("filename: ") + ".txt", "a+"))
