@@ -1,6 +1,7 @@
 '''
 Recursively generates the permutations of a set length of lower case letters (eg. 2 => aa ab ba bb).
 Writes the output to a file. BE AWARE THIS CODE GENERATES REALLY LARGE FILES REALLY QUICKLY, SO DON'T PUT IN A NUMBER LARGER THAN 5 OR SO UNLESS YOU HAVE THE SPACE (which you don't) TO STORE IT.
+I wrote this to see if it would run faster using the GPU or CPU (it's faster on the CPU).
 '''
 
 def permute(length: int, file, prev = None):
