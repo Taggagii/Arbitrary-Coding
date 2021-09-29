@@ -1,0 +1,96 @@
+/*
+Just a reminder of how to do speech recognition in a browser incase I ever decide to come back to this.
+*/
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button class = "talk">Talk</button>
+    <h3 class = "content"></h3>
+</body>
+<script>
+    const button = document.querySelector(".talk");
+    const content = document.querySelector(".content");
+
+    try {
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        const recognition = new SpeechRecognition();
+
+        recognition.lang = 'en-US';
+        
+        //recognition.interimResults = true;
+
+        //recognition.continuous = true;
+
+        console.log(recognition);
+
+        const quesResp = [
+            {
+                question: "How are you", 
+                answer: "I'm doing just fine, how are you?"
+            }
+        ];
+
+
+        var possibilities = [];
+        recognition.onstart = function() {
+            console.log("Voice is activated, you can speak to your now!");
+            possibilities = [];
+        }
+
+
+        recognition.onresult = function(event) {
+            var current = event.resultIndex;
+            var results = event.results[current][0];
+            var spoken = results.transcript;
+            var confidence = results.confidence * 100;
+            
+            content.textContent = spoken;
+            let values = quesResp.filter(value => value.question.toLowerCase() == spoken.toLowerCase());
+            speakOut(spoken);
+            
+            // if (confidence > 80)
+            // {
+            //     console.log(spoken, confidence);
+            // }
+
+
+            //content.textContent = spoken;
+            //speakOut(spoken);
+        }
+
+        //add the listener to the button
+        button.addEventListener('click', () => {
+            recognition.start();
+        })
+
+
+        recognition.onspeechend = function() {
+            console.log("Speech has ended");
+        }
+
+        } catch(e) {
+            console.error("Your browser doesn't support this");
+        }
+
+
+
+    function speakOut(message)
+    {
+        const speech = new SpeechSynthesisUtterance();
+        speech.volume = 1;
+        speech.rate = 1;
+        speech.pitch = 1;
+        speech.text = message; 
+        
+        window.speechSynthesis.speak(speech);
+    }
+</script>
+</html>
+
