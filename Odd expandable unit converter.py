@@ -1,6 +1,6 @@
 import time
 
-#someone made a very long and verbose and, frankly, painful unit converter in my class. They told me there "wasn't an easier way" and challanged me to make a better one
+#someone made a very long and verbose and, frankly, painful unit converter in my class (consisted of at least 100 if statements). They told me there "wasn't an easier way" and challanged me to make a better one
 #I made something which was more expandable and much smaller. Perhaps at the cost of simplisity
 
 #to expand: add values into amounts and units that correspond to their base value for their unit thing (distance, weight, etc.)
