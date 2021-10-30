@@ -1,0 +1,67 @@
+'''
+Turn on, lock your computer, leave the room. After 10 seconds the camera will turn on and it will record and save any motion is detects until you turn it off with the "`" key
+'''
+
+
+import cv2
+import os, glob, time, ffmpeg
+#cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    print("error opening file")
+
+start_time = time.time()
+base_path = os.path.dirname(os.path.abspath(__file__))
+temp_image_path = os.path.join(base_path, "temporary")
+os.system("md temporary")
+count = 10
+while True:
+    # countdown
+    if time.time() - start_time > 1:
+        print(count)
+        count -= 1
+        start_time = time.time()
+        if count <= 0:
+            break
+
+ret, previous = cap.read()
+
+while cap.isOpened():
+    ret, frame = cap.read()
+    diff = cv2.absdiff(previous, frame)
+    gray = cv2.cvtColor(diff, cv2.COLOR_BGR2GRAY)
+    blur = cv2.GaussianBlur(gray, (5, 5), 0)
+    _, thresh = cv2.threshold(blur, 20, 255, cv2.THRESH_BINARY)
+    dilated = cv2.dilate(thresh, None, iterations=4)
+    contours, hiers = cv2.findContours(dilated, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    if contours != []:
+        print("motion detected")
+        cv2.imwrite(f"{os.path.join(temp_image_path, str(time.time()))}.jpg", previous) 
+        
+                
+
+    cv2.imshow('thing', previous)
+    previous = frame
+    
+
+
+    if cv2.waitKey(60) == ord('`'):
+        break
+
+cv2.destroyAllWindows()
+
+
+images = glob.glob(os.path.join(temp_image_path, "*.jpg"))
+
+frame = cv2.imread(images[0])
+height, width, layers = frame.shape
+
+video = cv2.VideoWriter("output.mp4", 0, 15, (width, height))
+
+for image in images:
+    video.write(cv2.imread(image))
+
+cv2.destroyAllWindows()
+video.release()
+
+os.system("del temporary")
