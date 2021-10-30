@@ -24,9 +24,6 @@ os.system(f"md \"{folder}\"")
 
 url = input("Please enter the url of the video: ")
 
-#url = "https://www.youtube.com/watch?v=Y9nDagqKL7Q&ab_channel=ProZD"
-#url = "https://www.youtube.com/playlist?list=PLUkVlwCUGEJ8NaBS64DZrmFFd63RkcKzK"
-
 if "playlist" in url:
     playlist = Playlist(url)
     print(playlist.title)
