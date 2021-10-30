@@ -55,7 +55,6 @@ else:
     # Creates Youtube object
     yt = YouTube(url)
 
-    # Gets the video datag
     streams = yt.streams.filter(file_extension='mp4')
 
     print(f"Video Title: {yt.title}\n")
