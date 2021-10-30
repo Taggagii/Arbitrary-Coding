@@ -24,6 +24,9 @@ os.system(f"md \"{folder}\"")
 
 url = input("Please enter the url of the video: ")
 
+#url = "https://www.youtube.com/watch?v=Y9nDagqKL7Q&ab_channel=ProZD"
+#url = "https://www.youtube.com/playlist?list=PLUkVlwCUGEJ8NaBS64DZrmFFd63RkcKzK"
+
 if "playlist" in url:
     playlist = Playlist(url)
     print(playlist.title)
@@ -31,30 +34,37 @@ if "playlist" in url:
 
     if choice == "audio":
         print("Downloading audio...")
-        for urli in playlist:      
-            yt = YouTube(urli)
-            streams = yt.streams.filter(only_audio=True, file_extension='mp4')
-            streams.first().download(filename = os.path.join(folder, sanitize_filename(yt.title) + ".mp3") + ".mp3")
-            print('Download complete! File saved as ' + os.path.join(folder, sanitize_filename(yt.title) + ".mp3"))
+        for urli in playlist:
+            try:
+                yt = YouTube(urli)
+                streams = yt.streams.filter(only_audio=True, file_extension='mp4')
+                streams.first().download(filename = os.path.join(folder, sanitize_filename(yt.title) + ".mp3") + ".mp3")
+                print('Download complete! File saved as ' + os.path.join(folder, sanitize_filename(yt.title) + ".mp3"))
+            except Exception:
+                print(f'''There was an issue while downloading {yt.title}. This video has been skipped''')
 
     if choice == "video":
         for urli in playlist:
-            yt = YouTube(urli)
-            streams = yt.streams.filter(progressive=True, file_extension='mp4')
-            # Remove duplicate resolutions
-            newStreams = []
-            for i in range(len(streams)):
-                if streams[i].resolution != streams[i-1].resolution:
-                    newStreams.append(streams[i])
-            streams = newStreams
+            try:
+                yt = YouTube(urli)
+                streams = yt.streams.filter(progressive=True, file_extension='mp4')
+                # Remove duplicate resolutions
+                newStreams = []
+                for i in range(len(streams)):
+                    if streams[i].resolution != streams[i-1].resolution:
+                        newStreams.append(streams[i])
+                streams = newStreams
 
-            #res_choice = await_user_input([str(i.resolution) for i in streams], {str(i.resolution) : i for i in streams})
-            streams[0].download(filename = "video.mp4")
-            print(f'Download complete! File saved as "{os.path.join(folder, sanitize_filename(yt.title) + ".mp4")}"')
+                #res_choice = await_user_input([str(i.resolution) for i in streams], {str(i.resolution) : i for i in streams})
+                streams[0].download(filename = "video.mp4")
+                print(f'Download complete! File saved as "{os.path.join(folder, sanitize_filename(yt.title) + ".mp4")}"')
+            except Exception:
+                print(f'''There was an issue while downloading {yt.title}. This video has been skipped''')
 else:
     # Creates Youtube object
     yt = YouTube(url)
 
+    # Gets the video datag
     streams = yt.streams.filter(file_extension='mp4')
 
     print(f"Video Title: {yt.title}\n")
