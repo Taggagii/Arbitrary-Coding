@@ -185,22 +185,35 @@ def setup(p = None, q = None):
     
     return e, d, n, p, q
 
-def reduce_mod_power(a, power, mod):
-    # put power in terms of power's of 2
-    sum_p2_form = []
-    while power > 0:
-        value = (math.log(power) // math.log(2))
-        sum_p2_form.append(value)
-        power -= 2**value
-        
-    pows_of_two_mod = [a]
-    for _ in range(int(sum_p2_form[0])):
-        pows_of_two_mod.append(pows_of_two_mod[-1]**2 % mod)
-        
-    n = 1
-    for i in sum_p2_form:
-        n *= pows_of_two_mod[int(i)]
-    return n % mod
+def reduce_mod_power(b, p, mod):
+    b = b % mod
+
+    remainder = (b ** (p % 2)) % mod
+    p -= p % 2
+
+    while p != 1:
+        remainder = (remainder * (b ** (p % 2))) % mod
+        b = (b**2) % mod
+        p //= 2
+
+    return b*remainder % mod
+
+##def reduce_mod_power(a, power, mod):
+##    # put power in terms of power's of 2
+##    sum_p2_form = []
+##    while power > 0:
+##        value = (math.log(power) // math.log(2))
+##        sum_p2_form.append(value)
+##        power -= 2**value
+##        
+##    pows_of_two_mod = [a]
+##    for _ in range(int(sum_p2_form[0])):
+##        pows_of_two_mod.append(pows_of_two_mod[-1]**2 % mod)
+##        
+##    n = 1
+##    for i in sum_p2_form:
+##        n *= pows_of_two_mod[int(i)]
+##    return n % mod
 
 
 
