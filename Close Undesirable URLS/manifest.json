@@ -1,0 +1,17 @@
+{
+    "name": "Redirector",
+    "description": "Redirects any undesiredable URLs to google.com",
+    "version": "1.0",
+    "manifest_version": 3,
+    "permissions": [],
+    "content_scripts": [
+        {
+            "matches": [
+                "https://www.youtube.com/*"
+            ],
+            "js": [
+                "redirect.js"
+            ]
+        }
+    ]
+}
