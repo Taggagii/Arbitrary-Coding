@@ -1,5 +1,5 @@
 '''
-Quick code to help me in grade 12 Calculus so I didn't have to right tables by hand. Because I didn't like doing that I guess.
+Quick code to help me in grade 12 Calculus so I didn't have to write tables by hand. Because I didn't like doing that I guess.
 '''
 from math import inf, sin, cos, pi
 equation = input("enter the equation: ").replace('x', '(x)')
